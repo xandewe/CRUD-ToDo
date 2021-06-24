@@ -16,11 +16,6 @@ const createUser = async (req, res) => {
 
 }
 
-const getUsers = async (req, res) => {
-    const users = await Users.findAll();
-    res.json({data: users});
-}
-
 const login = async (req, res) => {
     const {email, password} = req.body
 
@@ -45,6 +40,5 @@ const login = async (req, res) => {
 
 module.exports = {
     createUser,
-    getUsers,
     login,
 };
