@@ -1,4 +1,4 @@
-const Task = require('../models/task')
+const Task = require('../models/task');
 
 const createTask = async (req, res) => {
     const {title, description, priority, status} = req.body;
@@ -13,10 +13,10 @@ const createTask = async (req, res) => {
         description: task.description,
         priority: task.priority,
         status: task.status,
-    }
+    };
     
     res.status(201).json({data: serializer});
-}
+};
 
 const getTasks = async (req, res) => {
 
@@ -26,7 +26,33 @@ const getTasks = async (req, res) => {
     const tasks = await Task.findAll({ where: {userId}, attributes: listFields});
 
     res.json({data: tasks});
-}
+};
+
+const getTaskById = async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    const task = await Task.findByPk(id);
+
+    if(task === null){
+        return res.status(404).json({msg: 'not found task'});
+    };
+
+    if(task.userId !== userId){
+        return res.status(401).json({msg: 'user unauthorized'});
+    };
+
+    serializer = {
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        status: task.status,
+    };
+    
+    res.json({data: serializer});
+};
+
 
 const updateTask = async (req, res) => {
     const { id } = req.params;
@@ -50,7 +76,7 @@ const updateTask = async (req, res) => {
         description: task.description,
         priority: task.priority,
         status: task.status,
-    }
+    };
     
     res.json({data: serializer});
 };
@@ -77,6 +103,7 @@ const destroyTask = async (req, res) => {
 module.exports = {
     createTask,
     getTasks,
+    getTaskById,
     updateTask,
     destroyTask,
 };

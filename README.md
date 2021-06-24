@@ -105,7 +105,7 @@ RESPONSE:
 #### obs: utilize o token do login para autenticar essa rota, caso não coloque o token, irá gerar um erro.
 
 ```
-ENDPOINT: /register/task
+ENDPOINT: /tasks
 
 HEADER:
 
@@ -130,6 +130,30 @@ RESPONSE:
       "status": "to do"
     }
   ]
+}
+```
+
+### acessando task pelo id:
+
+#### obs: utilize o token do login para autenticar essa rota, caso não coloque o token, irá gerar um erro. Não se esqueça de passar o id da task na url
+
+```
+ENDPOINT: /task/1
+
+HEADER:
+
+Authorization: token
+
+RESPONSE:
+
+{
+  "data": {
+    "id": 1,
+    "title": "Curso",
+    "description": "TCC",
+    "priority": 1,
+    "status": "to do"
+  }
 }
 ```
 

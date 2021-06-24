@@ -9,7 +9,7 @@ route.use(ud.verifyUserJWT);
 route.post('/register/task', td.validateKeys, dbTask.createTask); 
 
 route.get('/tasks', dbTask.getTasks);
-route.get('/task/:tid');
+route.get('/task/:id', dbTask.getTaskById);
 
 route.patch('/task/:id', dbTask.updateTask);
 
