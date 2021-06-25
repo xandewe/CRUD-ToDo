@@ -102,10 +102,10 @@ RESPONSE:
 
 ### acessando tasks:
 
-#### obs: utilize o token do login para autenticar essa rota, caso não coloque o token, irá gerar um erro.
+#### obs: utilize o token do login para autenticar essa rota, caso não coloque o token, irá gerar um erro. Caso não passe as querys de paginação por padrão será definido page = 1 e per_page = 4
 
 ```
-ENDPOINT: /tasks
+ENDPOINT: /tasks/?page=1&per_page=2
 
 HEADER:
 
@@ -114,7 +114,7 @@ Authorization: token
 RESPONSE:
 
 {
-  "data": [
+  "docs": [
     {
       "id": 1,
       "title": "Curso",
@@ -129,7 +129,9 @@ RESPONSE:
       "priority": 3,
       "status": "to do"
     }
-  ]
+  ],
+  "pages": 5,
+  "total": 10
 }
 ```
 

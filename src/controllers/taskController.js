@@ -21,11 +21,18 @@ const createTask = async (req, res) => {
 const getTasks = async (req, res) => {
 
     const userId = req.user.id;
-    const listFields = ['id', 'title', 'description', 'priority', 'status'];
+    const { page, per_page } = req.query 
 
-    const tasks = await Task.findAll({ where: {userId}, attributes: listFields});
+    const options = {
+        attributes: ['id', 'title', 'description', 'priority', 'status'],
+        page: page || 1, 
+        paginate: per_page || 4, 
+        where: { userId}
+      }
 
-    res.json({data: tasks});
+    const tasks = await Task.paginate(options)
+
+    res.json(tasks);
 };
 
 const getTaskById = async (req, res) => {
