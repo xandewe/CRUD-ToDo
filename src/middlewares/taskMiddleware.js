@@ -12,11 +12,11 @@ const validateKeys = (req, res, next) => {
     }
 
     if(!priority) {
-        errors.priority = 'Missing failed password'
+        errors.priority = 'Missing failed priority'
     }
 
     if(!status) {
-        errors.status = 'Missing failed password'
+        errors.status = 'Missing failed status'
     }
 
     if(Object.keys(errors).length !== 0) {

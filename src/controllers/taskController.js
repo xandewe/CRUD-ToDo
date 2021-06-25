@@ -26,9 +26,10 @@ const getTasks = async (req, res) => {
     const options = {
         attributes: ['id', 'title', 'description', 'priority', 'status'],
         page: page || 1, 
-        paginate: per_page || 4, 
-        where: { userId}
-      }
+        paginate: per_page || 4,
+        order: [['id', 'ASC']],
+        where: { userId }
+    }
 
     const tasks = await Task.paginate(options)
 
